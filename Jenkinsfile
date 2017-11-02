@@ -16,6 +16,7 @@ node {
 
     stage('Check') {
       sh 'cat test.txt'
+      sh 'git add test.txt && git commit -m "jenkins update"'
     }
   } catch (err) {
     throw err
