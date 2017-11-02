@@ -15,6 +15,10 @@ node {
     stage('Generate') {
       sh 'npm run generate'
     }
+
+    stage('Check') {
+      sh 'echo test.txt'
+    }
   } catch (err) {
     throw err
   }
