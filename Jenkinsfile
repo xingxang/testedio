@@ -4,10 +4,12 @@ import groovy.transform.Field
 node {
   try {
     stage('Checkout'){
-      when {
-        expression { 'g' == 'greeting' }
+      if ('master' == 'master') {
+        currentBuild.result = 'SUCCESS'
+        return
+      } else {
+        checkout scm
       }
-      checkout scm
     }
     stage('Build') {
       sh 'npm install'
