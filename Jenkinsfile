@@ -5,6 +5,7 @@ node {
   try {
     stage('Checkout'){
       if ('master' == 'master') {
+        sh 'echo "RARARA"'
         currentBuild.result = 'SUCCESS'
         return
       } else {
