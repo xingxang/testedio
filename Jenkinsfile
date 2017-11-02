@@ -14,7 +14,7 @@ node {
     }
     stage('Check') {
       sh 'cat test.txt'
-      sh 'git config --global user.email "a@a.com" && git config --global user.name "D" && git add test.txt && git commit -m "jenkins update"'
+      sh 'git config --global user.email "a@a.com" && git config --global user.name "D" && git add test.txt && git commit -m "jenkins update" && git push origin'
     }
   } catch (err) {
     throw err
