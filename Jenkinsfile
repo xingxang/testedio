@@ -5,6 +5,7 @@ node {
   try {
     stage('Checkout'){
       checkout scm
+      sh 'env'
     }
     stage('Build') {
       sh 'npm install'
