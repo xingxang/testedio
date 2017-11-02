@@ -7,8 +7,6 @@ node {
       checkout scm
     }
     stage('Build') {
-      sh 'pwd'
-      sh 'ls'
       sh 'npm install'
     }
 
@@ -17,7 +15,7 @@ node {
     }
 
     stage('Check') {
-      sh 'echo test.txt'
+      sh 'cat test.txt'
     }
   } catch (err) {
     throw err
