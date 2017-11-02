@@ -19,5 +19,7 @@ node {
     }
   } catch (err) {
     throw err
+  } finally {
+    deleteDir()
   }
 }
