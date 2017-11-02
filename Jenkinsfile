@@ -4,13 +4,7 @@ import groovy.transform.Field
 node {
   try {
     stage('Checkout'){
-      if ('master' == 'master') {
-        sh 'echo "RARARA"'
-        currentBuild.result = 'SUCCESS'
-        return
-      } else {
-        checkout scm
-      }
+      checkout scm
     }
     stage('Build') {
       sh 'npm install'
@@ -20,7 +14,7 @@ node {
     }
     stage('Check') {
       sh 'cat test.txt'
-      sh 'git add test.txt && git commit -m "jenkins update"'
+      sh 'git config --global user.email "a@a.com" && git config --global user.name "D" && git add test.txt && git commit -m "jenkins update"'
     }
   } catch (err) {
     throw err
