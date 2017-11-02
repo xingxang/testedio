@@ -3,6 +3,7 @@ import groovy.transform.Field
 
 node {
   stage('Build') {
+    sh 'pwd'
     sh 'npm install'
   }
 
