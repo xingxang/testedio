@@ -5,10 +5,11 @@ node {
   try {
     stage('Checkout') {
       checkout scm
+      sh 'env.BRANCH_NAME'
       author = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
       if (author == 'Dmitri') {
           currentBuild.result = 'ABORTED'
-          error('Jenkins update: aborting.')
+          error('Jenkins update: aborting')
       }
     }
     stage('Build') {
