@@ -7,10 +7,10 @@ node {
       checkout scm
       echo env.BRANCH_NAME
       author = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
-      if (author == 'Dmitri') {
-          currentBuild.result = 'ABORTED'
-          error('Jenkins update: aborting')
-      }
+      // if (author == 'Dmitri') {
+      //     currentBuild.result = 'ABORTED'
+      //     error('Jenkins update: aborting')
+      // }
     }
     stage('Build') {
       // tests etc
