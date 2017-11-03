@@ -21,13 +21,14 @@ node {
        url: 'https://github.com/xingxang/testedio.git',
        credentialsId: 'be7926f0-9204-498f-bb26-d2f8b96864d3',
        branch: "master"
-      ) 
+      )
 
       sh '''
         npm run generate
         git add .
         git commit -m "jenkins update"
-        git push origin master
+        git log
+        git push origin master"
         '''
     }
   } catch (err) {
