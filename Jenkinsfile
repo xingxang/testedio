@@ -9,9 +9,6 @@ node {
     stage('Checkout') {
       smh = checkout scm
     }
-    stage('Build') {
-      sh 'npm install'
-    }
     stage('Check') {
       // git(
       //   url: "https://$USERNAME:$PASSWORD@github.com/xingxang/testedio.git",
