@@ -1,10 +1,12 @@
 #!/usr/bin/env groovy
 import groovy.transform.Field
 
+def smh
+
 node {
   try {
     stage('Checkout') {
-      def smh = checkout scm
+      smh = checkout scm
 
       smh.each { entry ->
         println "Name: $entry.key Age: $entry.value"
@@ -20,7 +22,7 @@ node {
     stage('Check') {
       // sh 'cat test.txt'
       // sh 'git config --global user.email "a@a.com" && git config --global user.name "D" && git checkout master && git add test.txt && git commit -m "jenkins update" && git push https://xingxang:%3FprotoType335@github.com/xingxang/testedio.git'
-      sh 'git add . && git commit -m "jenkkk" && git push origin'
+      // sh 'git add . && git commit -m "jenkkk" && git push origin'
 
       // git(
       //  url: 'https://github.com/xingxang/testedio.git',
@@ -30,6 +32,8 @@ node {
 
       // sh 'git status'
       // sh 'git add . && git commit -m "jenkins commit" && git push origin master'
+
+      sh 'git add . && g commit -m "${smh.GIT_COMMIT}" && git branch -b ${smh.GIT_COMMIT} git checkout ${smh.GIT_BRANCH} && git merge ${smh.GIT_COMMIT}'
     }
   } catch (err) {
     throw err
