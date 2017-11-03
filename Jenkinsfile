@@ -5,7 +5,7 @@ node {
   try {
     stage('Checkout') {
       def smh = checkout scm
-      echo smh.GIT_COMMIT
+      echo smh.GIT_BRANCH
     }
     stage('Build') {
       // tests etc
