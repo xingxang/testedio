@@ -19,6 +19,7 @@ node {
     stage('Check') {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'be7926f0-9204-498f-bb26-d2f8b96864d3', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
         sh 'echo uname=$USERNAME pwd=$PASSWORD'
+        sh 'git status'
       }
       // git(
       //  url: 'https://github.com/xingxang/testedio.git',
