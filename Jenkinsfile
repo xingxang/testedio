@@ -17,12 +17,12 @@ node {
       sh 'npm install'
     }
     stage('Check') {
-      git(
-      //  url: 'https://github.com/xingxang/testedio.git',
+      def smhh = git(
+       url: 'https://github.com/xingxang/testedio.git',
        credentialsId: 'be7926f0-9204-498f-bb26-d2f8b96864d3',
        branch: "master"
       )
-
+      println smhh
       sh '''
         npm run generate
         git add .
