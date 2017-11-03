@@ -35,6 +35,7 @@ node {
       def msg = smh.GIT_COMMIT
       println msg
       sh "git add . && git commit -m \"$msg\""
+      sh "git log"
     }
   } catch (err) {
     throw err
