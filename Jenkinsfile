@@ -11,6 +11,10 @@ node {
       smh.each { entry ->
         println "$entry.key: $entry.value"
       }
+
+      env.each { entry ->
+        println "$entry.key: $entry.value"
+      }
     }
     stage('Build') {
       // tests etc
