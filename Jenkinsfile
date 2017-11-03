@@ -28,8 +28,8 @@ node {
         sh '''
           npm run generate
           git add .
-          git commit -m 'jenkins update'
-          git push origin master"
+          git commit -m "jenkins update"
+          git push origin master
           '''
       }
     }
