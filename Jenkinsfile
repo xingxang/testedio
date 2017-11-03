@@ -27,7 +27,7 @@ node {
         npm run generate
         git add .
         git commit -m "jenkins update"
-        sh "git push origin master"
+        git push origin master
         '''
     }
   } catch (err) {
