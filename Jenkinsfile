@@ -15,6 +15,7 @@ node {
     stage('Check') {
       sh "git checkout $CHANGE_BRANCH"
       sh "npm run generate"
+      sh "git add ."
       sh "git commit -m 'jenkekekekek'"
       sh "git push origin $CHANGE_BRANCH"
 
