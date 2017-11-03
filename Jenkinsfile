@@ -13,7 +13,7 @@ node {
       sh 'npm install'
     }
     stage('Check') {
-      sh "git checkout origin/${env.CHANGE_BRANCH}"
+      sh "git checkout -b ${env.CHANGE_BRANCH}"
       sh "npm run generate"
       sh "git add ."
       sh "git commit -m 'jenkekekekek'"
