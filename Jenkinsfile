@@ -20,7 +20,7 @@ node {
       git(
        url: 'https://github.com/xingxang/testedio.git',
        credentialsId: 'be7926f0-9204-498f-bb26-d2f8b96864d3',
-       branch: 'master'
+       branch: smh.GIT_BRANCH
       ) 
 
       sh 'git status'
