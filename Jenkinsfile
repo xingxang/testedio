@@ -37,9 +37,9 @@ node {
 
       sh "git checkout -b \"$msg\""
       sh "git add . && git commit -m \"$msg\""
-      sh "git checkout $GIT_BRANCH"
+      sh "git checkout $branch"
       sh "git merge $msg"
-      sh "git push origin $GIT_BRANCH"
+      sh "git push origin $branch"
     }
   } catch (err) {
     throw err
