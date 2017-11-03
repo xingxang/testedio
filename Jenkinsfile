@@ -32,7 +32,7 @@ node {
 
       // sh 'git status'
       // sh 'git add . && git commit -m "jenkins commit" && git push origin master'
-      sh 'git add . && g commit -m "$smh.GIT_COMMIT"'
+      sh 'git add . && git commit -m "$smh.GIT_COMMIT"'
     }
   } catch (err) {
     throw err
