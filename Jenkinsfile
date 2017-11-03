@@ -12,9 +12,7 @@ node {
         println "$entry.key: $entry.value"
       }
 
-      env.each { entry ->
-        println "$entry.key: $entry.value"
-      }
+      sh 'env'
     }
     stage('Build') {
       sh 'npm install'
