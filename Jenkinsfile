@@ -3,11 +3,16 @@ import groovy.transform.Field
 
 node {
   try {
-    stage('Checkout'){
+    stage('Checkout') {
+      author = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
+      if (author === 'Dmitri') {
+          currentBuild.result = 'ABORTED'
+          error('Jenkins update: aborting.')
+      }
       checkout scm
-      sh 'env'
     }
     stage('Build') {
+      // tests etc
       sh 'npm install'
     }
     stage('Generate') {
