@@ -29,7 +29,11 @@ node {
             branch: "${env.CHANGE_BRANCH}"
         )
 
-        sh 'git status'
+        sh "npm run generate"
+        sh "git add ."
+        sh "git commit -m 'jenkekekekek'"
+        sh "git push origin ${env.CHANGE_BRANCH}"
+      
       //   sh '''
       //     npm run generate
       //     git add .
