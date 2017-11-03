@@ -5,7 +5,7 @@ node {
   try {
     stage('Checkout') {
       checkout scm
-      echo BRANCH_NAME
+      echo env.BRANCH_NAME
       author = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
       if (author == 'Dmitri') {
           currentBuild.result = 'ABORTED'
