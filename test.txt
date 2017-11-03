@@ -1,1 +1,1 @@
-Value: EXE
+Value: COM
