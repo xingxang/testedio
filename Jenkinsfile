@@ -5,7 +5,7 @@ node {
   try {
     stage('Checkout') {
       author = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
-      if (author === 'Dmitri') {
+      if (author == 'Dmitri') {
           currentBuild.result = 'ABORTED'
           error('Jenkins update: aborting.')
       }
