@@ -1,1 +1,1 @@
-Value: XML
+Value: EXE
