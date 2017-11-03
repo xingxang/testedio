@@ -33,9 +33,13 @@ node {
       // sh 'git status'
       // sh 'git add . && git commit -m "jenkins commit" && git push origin master'
       def msg = smh.GIT_COMMIT
-      println msg
+      def branch = smh.GIT_BRANCH
+
+      sh "git checkout -b \"$msg\""
       sh "git add . && git commit -m \"$msg\""
-      sh "git log"
+      sh "git checkout $GIT_BRANCH"
+      sh "git merge $msg"
+      sh "git push origin $GIT_BRANCH"
     }
   } catch (err) {
     throw err
