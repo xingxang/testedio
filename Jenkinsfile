@@ -33,6 +33,8 @@ node {
       // sh 'git status'
       // sh 'git add . && git commit -m "jenkins commit" && git push origin master'
       def msg = smh.GIT_COMMIT
+      println msg
+      println $msg
       sh '''
           git add . && git commit -m \"$msg\"
          '''
