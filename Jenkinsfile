@@ -5,7 +5,10 @@ node {
   try {
     stage('Checkout') {
       def smh = checkout scm
-      echo smh.GIT_BRANCH
+
+      smh.each { entry ->
+        println "Name: $entry.key Age: $entry.value"
+      }
     }
     stage('Build') {
       // tests etc
