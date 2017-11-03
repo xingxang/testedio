@@ -26,7 +26,7 @@ node {
        branch: 'master'
       )
 
-      sh 'git add . && g commit -m "jenkins commit" && g push origin master'
+      sh 'git add . && git commit -m "jenkins commit" && git push origin master'
     }
   } catch (err) {
     throw err
