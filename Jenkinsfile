@@ -4,13 +4,8 @@ import groovy.transform.Field
 node {
   try {
     stage('Checkout') {
-      checkout scm
-      echo env.BRANCH_NAME
-      author = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
-      // if (author == 'Dmitri') {
-      //     currentBuild.result = 'ABORTED'
-      //     error('Jenkins update: aborting')
-      // }
+      def smh = checkout scm
+      echo smh
     }
     stage('Build') {
       // tests etc
