@@ -20,7 +20,7 @@ node {
       // sh "git add ."
       // sh "git commit -m 'jenkekekekek'"
       // sh "git push origin ${env.CHANGE_BRANCH}"
-
+      println "${env.CHANGE_BRANCH}"
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
         sh 'echo uname=$USERNAME pwd=$PASSWORD'
           git(
