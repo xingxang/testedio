@@ -13,11 +13,11 @@ node {
       sh 'npm install'
     }
     stage('Check') {
-      sh "git checkout $CHANGE_BRANCH"
+      sh "git checkout ${env.CHANGE_BRANCH}"
       sh "npm run generate"
       sh "git add ."
       sh "git commit -m 'jenkekekekek'"
-      sh "git push origin $CHANGE_BRANCH"
+      sh "git push origin ${env.CHANGE_BRANCH}"
 
       // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'be7926f0-9204-498f-bb26-d2f8b96864d3', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
       //   sh 'echo uname=$USERNAME pwd=$PASSWORD'
