@@ -7,14 +7,13 @@ def CHANGE_TARGET = 'master'
 node {
   try {
     stage('Checkout') {
-      smh = checkout scm
-
-      smh.each { entry ->
-        println "$entry.key: $entry.value"
-      }
-
-      def myVar = build.getEnvironment(listener).get('CHANGE_TARGET')
-      println myVar
+      //  withEnv(["NAME=value"]) {
+        smh = checkout scm
+        println env.CHANGE_TARGET
+        // smh.each { entry ->
+        //   println "$entry.key: $entry.value"
+        // }
+      // }
     }
     stage('Build') {
       sh 'npm install'
