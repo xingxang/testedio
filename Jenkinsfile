@@ -7,19 +7,17 @@ def CHANGE_TARGET = 'master'
 node {
   try {
     stage('Checkout') {
-      //  withEnv(["NAME=value"]) {
-        smh = checkout scm
-        println env.CHANGE_TARGET
-        // smh.each { entry ->
-        //   println "$entry.key: $entry.value"
-        // }
-      // }
+      smh = checkout scm
     }
     stage('Build') {
       sh 'npm install'
     }
     stage('Check') {
-      sh 'git status'
+      sh "git checkout $CHANGE_BRANCH"
+      sh "npm run generate"
+      sh "git commit -m 'jenkekekekek'"
+      sh "git push origin $CHANGE_BRANCH"
+
       // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'be7926f0-9204-498f-bb26-d2f8b96864d3', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
       //   sh 'echo uname=$USERNAME pwd=$PASSWORD'
       //   git(
