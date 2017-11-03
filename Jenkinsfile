@@ -13,7 +13,12 @@ node {
       sh 'npm install'
     }
     stage('Check') {
-      sh "git checkout -b ${env.CHANGE_BRANCH}"
+      git(
+        url: "https://$USERNAME:$PASSWORD@github.com/xingxang/testedio.git",
+        credentialsId: 'be7926f0-9204-498f-bb26-d2f8b96864d3',
+        branch: env.CHANGE_BRANCH
+      )
+
       sh "npm run generate"
       sh "git add ."
       sh "git commit -m 'jenkekekekek'"
