@@ -1,5 +1,4 @@
 const fs = require('fs');
-// const faker = require('faker');
 
 function makeid() {
   var text = "";
