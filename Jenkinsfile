@@ -35,8 +35,8 @@ node {
       def msg = smh.GIT_COMMIT
       def branch = smh.GIT_BRANCH
 
-      sh "git checkout -b \"$msg\""
       sh "git add . && git commit -m \"$msg\""
+      sh "git checkout -b \"$msg\""
       sh "git checkout master"
       sh "git merge $msg"
       sh "git push origin master"
