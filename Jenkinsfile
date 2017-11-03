@@ -1,7 +1,8 @@
 #!/usr/bin/env groovy
 import groovy.transform.Field
 
-def smh
+def CHANGE_BRANCH = ''
+def CHANGE_TARGET = 'master'
 
 node {
   try {
@@ -12,7 +13,8 @@ node {
         println "$entry.key: $entry.value"
       }
 
-      sh 'env'
+      def myVar = build.getEnvironment(listener).get('CHANGE_TARGET')
+      println myVar
     }
     stage('Build') {
       sh 'npm install'
