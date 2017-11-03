@@ -34,7 +34,7 @@ node {
       // sh 'git add . && git commit -m "jenkins commit" && git push origin master'
       def msg = smh.GIT_COMMIT
       sh '''
-          git add . && git commit -m "$msg"
+          git add . && git commit -m \"$msg\"
          '''
     }
   } catch (err) {
