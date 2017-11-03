@@ -1,9 +1,6 @@
 #!/usr/bin/env groovy
 import groovy.transform.Field
 
-def CHANGE_BRANCH = ''
-def CHANGE_TARGET = 'master'
-
 node {
   try {
     stage('Checkout') {
