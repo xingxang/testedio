@@ -34,7 +34,7 @@ node {
       // sh 'git add . && git commit -m "jenkins commit" && git push origin master'
       println smh.GIT_COMMIT
       println smh.GIT_BRANCH
-      sh 'git add . && g commit -m "${smh.GIT_COMMIT}" && git branch -b ${smh.GIT_COMMIT} git checkout ${smh.GIT_BRANCH} && git merge ${smh.GIT_COMMIT}'
+      sh 'git add . && g commit -m "${smh.GIT_COMMIT}"'
     }
   } catch (err) {
     throw err
