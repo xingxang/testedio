@@ -4,7 +4,7 @@ import groovy.transform.Field
 node {
   try {
     stage('Checkout') {
-      checkout scm
+      def smh = checkout scm
 
       def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
       if (commit.contains('[ci-skip]')) {
