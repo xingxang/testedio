@@ -12,7 +12,7 @@ node {
 
       if (commit.contains('[ci-skip]')) {
         isCiSkip = true;
-        throw;
+        throw
       }
     }
     stage('Check') {
