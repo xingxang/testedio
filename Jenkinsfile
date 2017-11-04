@@ -45,6 +45,7 @@ node {
       }
     }
   } catch (err) {
+    println err.message
     if (isCiSkip) {
       currentBuild.result = 'SUCCESS'
       return
