@@ -28,7 +28,9 @@ node {
         sh "npm run generate"
 
         def modifiedFiles = sh(script: "g ls-files -m", returnStdout: true)
+
         println modifiedFiles
+
         // if (modifiedFiles) {
 
         // }
