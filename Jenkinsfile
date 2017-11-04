@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 import groovy.transform.Field
 
-def isCiSkip = false;
 def skipLabel = '[ci-skip]';
 
 node {
@@ -11,7 +10,6 @@ node {
       def commitMessage = sh(script: "git log --format=%B -n 1 ${commit.GIT_COMMIT}", returnStdout: true).trim()
 
       if (commitMessage.contains(skipLabel)) {
-        isCiSkip = true;
         throw new Exception(skipLabel)
       }
     }
@@ -44,8 +42,6 @@ node {
       }
     }
   } catch (err) {
-    println "err.message"
-    println err.message
     if (err.message == skipLabel) {
       currentBuild.result = 'SUCCESS'
       return
