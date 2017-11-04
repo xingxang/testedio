@@ -9,8 +9,7 @@ node {
       def smh = checkout scm
 
       def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
-      println 'COMMITITITITIIT'
-      println commit
+
       if (commit.contains('[ci-skip]')) {
         isCiSkip = true;
         throw 'isCiSKip'
@@ -33,13 +32,11 @@ node {
 
         println modifiedFiles
 
-        // if (modifiedFiles) {
-
-        // }
-
-        sh "git add ."
-        sh "git commit -m 'localisation [ci skip]'"
-        sh "git push origin ${BRANCH_NAME}"
+        if (modifiedFiles) {
+          sh "git add ."
+          sh "git commit -m 'localisation [ci skip]'"
+          sh "git push origin ${BRANCH_NAME}"
+        }
       }
     }
   } catch (err) {
