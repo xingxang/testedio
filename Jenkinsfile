@@ -4,9 +4,13 @@ import groovy.transform.Field
 node {
   try {
     stage('Checkout') {
-      smh = checkout scm
-      smh.each{ k, v -> println "${k}:${v}" }
-      sh 'env'
+      checkout scm
+
+      def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
+      if (commit.contains('[ci-skip]')) {
+        currentBuild.result = 'SUCCESS'
+        return
+      }
     }
     stage('Check') {
       def BRANCH_NAME = env.CHANGE_BRANCH || env.BRANCH_NAME;
