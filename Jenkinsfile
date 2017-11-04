@@ -16,10 +16,10 @@ node {
           branch: "${BRANCH_NAME}"
         )
 
-        sh "npm run generate"
-        sh "git add ."
-        sh "git commit -m 'localisation [ci skip]'"
-        sh "git push origin ${BRANCH_NAME}"
+        // sh "npm run generate"
+        // sh "git add ."
+        // sh "git commit -m 'localisation [ci skip]'"
+        // sh "git push origin ${BRANCH_NAME}"
       }
     }
   } catch (err) {
