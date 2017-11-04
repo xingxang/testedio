@@ -7,10 +7,9 @@ node {
       def smh = checkout scm
 
       def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
-      println commit
+
       if (commit.contains('[ci-skip]')) {
-        currentBuild.result = 'SUCCESS'
-        return
+        throw new Exception("ciSkip");
       }
     }
     stage('Check') {
@@ -23,13 +22,18 @@ node {
           branch: "${BRANCH_NAME}"
         )
 
-        // sh "npm run generate"
-        // sh "git add ."
-        // sh "git commit -m 'localisation [ci skip]'"
-        // sh "git push origin ${BRANCH_NAME}"
+        sh "npm run generate"
+        sh "git add ."
+        sh "git commit -m 'localisation [ci skip]'"
+        sh "git push origin ${BRANCH_NAME}"
       }
     }
   } catch (err) {
+    if (err.message == 'ciSkip') {
+      currentBuild.result = 'SUCCESS'
+      return
+    }
+
     throw err
   } finally {
     deleteDir()
