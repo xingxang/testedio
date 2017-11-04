@@ -13,7 +13,7 @@ node {
       if (commitMessage.contains(skipLabel)) {
         isCiSkip = true;
         // throw 'isCiSKip'
-        throw new Exception()
+        throw new Exception(skipLabel)
       }
     }
     stage('Check') {
@@ -45,6 +45,7 @@ node {
       }
     }
   } catch (err) {
+    println err.message
     if (isCiSkip) {
       currentBuild.result = 'SUCCESS'
       return
