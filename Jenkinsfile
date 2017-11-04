@@ -18,7 +18,7 @@ node {
 
         sh "npm run generate"
         sh "git add ."
-        sh "git commit -m 'jenkekekekek'"
+        sh "git commit -m 'localisation [ci skip]'"
         sh "git push origin ${BRANCH_NAME}"
       }
     }
