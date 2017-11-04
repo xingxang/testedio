@@ -5,6 +5,8 @@ node {
   try {
     stage('Checkout') {
       smh = checkout scm
+      smh.each{ k, v -> println "${k}:${v}" }
+      sh 'env'
     }
     stage('Check') {
       def BRANCH_NAME = env.CHANGE_BRANCH || env.BRANCH_NAME;
