@@ -2,15 +2,15 @@
 import groovy.transform.Field
 
 def isCiSkip = false;
+def skipLabel = '[ci-skip]';
 
 node {
   try {
     stage('Checkout') {
-      def smh = checkout scm
+      def commit = checkout scm
+      def commitMessage = sh(script: "git log --format=%B -n 1 ${commit.GIT_COMMIT}", returnStdout: true).trim()
 
-      def commit = sh(script: "git log --format=%B -n 1 ${smh.GIT_COMMIT}", returnStdout: true).trim()
-      println commit
-      if (commit.contains('[ci-skip]')) {
+      if (commitMessage.contains(skipLabel)) {
         isCiSkip = true;
         throw 'isCiSKip'
       }
@@ -18,11 +18,16 @@ node {
     stage('Check') {
       def BRANCH_NAME = env.CHANGE_BRANCH ?: env.BRANCH_NAME;
 
-      withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+      withCredentials([[
+        $class: 'UsernamePasswordMultiBinding',
+        credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb',
+        usernameVariable: 'USERNAME',
+        passwordVariable: 'PASSWORD'
+      ]]) {
         git(
           url: "https://$USERNAME:$PASSWORD@github.com/xingxang/testedio.git",
           credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb',
-          branch: "${BRANCH_NAME}"
+          branch: BRANCH_NAME
         )
 
         sh "npm run generate"
@@ -30,9 +35,10 @@ node {
         def modifiedFiles = sh(script: "git ls-files -m", returnStdout: true)
 
         if (modifiedFiles) {
+          println "ADDING FILESSSSSSS"
           sh "git add ."
-          sh "git commit -m 'localisation [ci-skip]'"
-          sh "git push origin ${BRANCH_NAME}"
+          sh "git commit -m 'localisation $skipLabel}'"
+          sh "git push origin $BRANCH_NAME"
         }
       }
     }
