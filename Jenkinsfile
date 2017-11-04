@@ -37,7 +37,7 @@ node {
 
         if (modifiedFiles) {
           sh """
-            git add ."
+            git add .
             git commit -m 'localisation $skipLabel}'
             git push origin $BRANCH_NAME
             """
