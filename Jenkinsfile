@@ -10,23 +10,14 @@ node {
 
       def commit = sh(script: "git log --format=%B -n 1 ${smh.GIT_COMMIT}", returnStdout: true)
 
-      println "@@@@ COMMIT MESSAGE:"
-      sh "git log --format=%B -n 1 ${smh.GIT_COMMIT}"
-      println commit.contains('[ci-skip]')
       if (commit.contains('[ci-skip]')) {
-        println "@@@@ COMMIT HAS CI-SKIP"
         isCiSkip = true;
         throw 'isCiSKip'
       }
     }
     stage('Check') {
       def BRANCH_NAME = env.CHANGE_BRANCH ?: env.BRANCH_NAME;
-      println "@@@@ BRRRRANCH:"
-      println env.BRANCH_NAME
-      println env.CHANGE_BRANCH
-      println "@@@@ FINAL LL BRRRRANCH:"
-      println BRANCH_NAME
-      println "@@@@ FINAL LL BRRRRANCH:"
+
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
         git(
           url: "https://$USERNAME:$PASSWORD@github.com/xingxang/testedio.git",
@@ -38,10 +29,7 @@ node {
 
         def modifiedFiles = sh(script: "git ls-files -m", returnStdout: true)
 
-        println "@@@@ MODIFIED FILES ${modifiedFiles}"
-
         if (modifiedFiles) {
-          println "@@@@ COMMITING"
           sh "git add ."
           sh "git commit -m 'localisation [ci-skip]'"
           sh "git push origin ${BRANCH_NAME}"
