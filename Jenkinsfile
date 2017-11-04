@@ -9,7 +9,8 @@ node {
       def smh = checkout scm
 
       def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
-
+      println 'COMMITITITITIIT'
+      println commit
       if (commit.contains('[ci-skip]')) {
         isCiSkip = true;
         throw 'isCiSKip'
@@ -24,6 +25,7 @@ node {
           credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb',
           branch: "${BRANCH_NAME}"
         )
+        println 'SUKAAAAAAAAAAA'
 
         sh "npm run generate"
 
@@ -41,7 +43,6 @@ node {
       }
     }
   } catch (err) {
-    println err;
     if (isCiSkip) {
       currentBuild.result = 'SUCCESS'
       return
