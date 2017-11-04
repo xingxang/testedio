@@ -10,7 +10,7 @@ node {
 
       def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
 
-      sh "@@@@ COMMIT MESSAGE:"
+      println "@@@@ COMMIT MESSAGE:"
       sh "git log --format=%B -n 1 ${smh.GIT_COMMIT}"
 
       if (commit.contains('[ci-skip]')) {
