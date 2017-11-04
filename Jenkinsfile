@@ -28,6 +28,7 @@ node {
           branch: BRANCH_NAME
         )
 
+        sh "git pull"
         sh "npm run generate"
 
         def modifiedFiles = sh(script: "git ls-files -m", returnStdout: true)
