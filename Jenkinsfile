@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
 import groovy.transform.Field
 
+def isCiSkip = false;
+
 node {
   try {
     stage('Checkout') {
@@ -9,7 +11,8 @@ node {
       def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
 
       if (commit.contains('[ci-skip]')) {
-        throw new Exception("ciSkip");
+        isCiSkip = true;
+        throw;
       }
     }
     stage('Check') {
@@ -29,7 +32,7 @@ node {
       }
     }
   } catch (err) {
-    if (err.message == 'ciSkip') {
+    if (isCiSkip) {
       currentBuild.result = 'SUCCESS'
       return
     }
