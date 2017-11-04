@@ -12,5 +12,5 @@ function makeid() {
 
 const input = `Value: ${makeid()}`;
 
-// fs.writeFile('test.txt', input, () => console.log('build done'));
-// fs.writeFile('test2.txt', input, () => console.log('build done'));
+fs.writeFile('test.txt', input, () => console.log('build done'));
+fs.writeFile('test2.txt', input, () => console.log('build done'));

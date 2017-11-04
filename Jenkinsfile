@@ -12,7 +12,8 @@ node {
 
       if (commitMessage.contains(skipLabel)) {
         isCiSkip = true;
-        throw 'isCiSKip'
+        // throw 'isCiSKip'
+        throw new Exception()
       }
     }
     stage('Check') {
@@ -35,10 +36,11 @@ node {
         def modifiedFiles = sh(script: "git ls-files -m", returnStdout: true)
 
         if (modifiedFiles) {
-          println "ADDING FILESSSSSSS"
-          sh "git add ."
-          sh "git commit -m 'localisation $skipLabel}'"
-          sh "git push origin $BRANCH_NAME"
+          sh """
+            git add ."
+            git commit -m 'localisation $skipLabel}'
+            git push origin $BRANCH_NAME
+            """
         }
       }
     }
