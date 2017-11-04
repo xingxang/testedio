@@ -10,7 +10,11 @@ node {
 
       def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
 
+      println "@@@@ COMMIT MESSAGE:"
+      sh "git log --format=%B -n 1 ${smh.GIT_COMMIT}"
+
       if (commit.contains('[ci-skip]')) {
+        println "@@@@ COMMIT HAS CI-SKIP"
         isCiSkip = true;
         throw 'isCiSKip'
       }
@@ -24,17 +28,17 @@ node {
           credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb',
           branch: "${BRANCH_NAME}"
         )
-        println 'SUKAAAAAAAAAAA'
 
         sh "npm run generate"
 
         def modifiedFiles = sh(script: "git ls-files -m", returnStdout: true)
 
-        println modifiedFiles
+        println "@@@@ MODIFIED FILES ${modifiedFiles}"
 
         if (modifiedFiles) {
+          println "@@@@ COMMITING"
           sh "git add ."
-          sh "git commit -m 'localisation [ci skip]'"
+          sh "git commit -m 'localisation [ci-skip]'"
           sh "git push origin ${BRANCH_NAME}"
         }
       }
