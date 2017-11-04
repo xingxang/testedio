@@ -20,11 +20,13 @@ node {
       }
     }
     stage('Check') {
-      def BRANCH_NAME = env.CHANGE_BRANCH || env.BRANCH_NAME;
+      def BRANCH_NAME = env.CHANGE_BRANCH ?: env.BRANCH_NAME;
       println "@@@@ BRRRRANCH:"
       println env.BRANCH_NAME
       println env.CHANGE_BRANCH
+      println "@@@@ FINAL LL BRRRRANCH:"
       println BRANCH_NAME
+      println "@@@@ FINAL LL BRRRRANCH:"
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ad5310d2-4edb-4b53-8d80-6b0aaaececcb', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
         git(
           url: "https://$USERNAME:$PASSWORD@github.com/xingxang/testedio.git",
