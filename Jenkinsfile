@@ -8,11 +8,11 @@ node {
     stage('Checkout') {
       def smh = checkout scm
 
-      def commit = sh(script: "git show ${smh.GIT_COMMIT}", returnStdout: true)
+      def commit = sh(script: "git log --format=%B -n 1 ${smh.GIT_COMMIT}", returnStdout: true)
 
       println "@@@@ COMMIT MESSAGE:"
       sh "git log --format=%B -n 1 ${smh.GIT_COMMIT}"
-
+      println commit.contains('[ci-skip]')
       if (commit.contains('[ci-skip]')) {
         println "@@@@ COMMIT HAS CI-SKIP"
         isCiSkip = true;
